@@ -242,7 +242,15 @@ export async function getEvents() {
   const events: Event[] = [];
   await base("Events")
     .select({
-      fields: ["Name", "Description", "Website", "Guests", "Start", "End"],
+      fields: [
+        "Name",
+        "Description",
+        "Website",
+        "Guests",
+        "Start",
+        "End",
+        "Location names",
+      ],
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
