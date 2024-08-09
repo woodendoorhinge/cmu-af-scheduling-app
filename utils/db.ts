@@ -23,7 +23,6 @@ export async function getSessions() {
   const sessions: Session[] = [];
   await base("Sessions")
     .select({
-      view: "Scheduled sessions",
       fields: [
         "Title",
         "Description",
@@ -35,8 +34,9 @@ export async function getSessions() {
         "Location",
         "Location name",
         "Capacity",
-        "NumRSVPs",
+        "Num RSVPs",
       ],
+      filterByFormula: `AND({Start time}, {End time}, {Location})`,
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
@@ -51,7 +51,6 @@ export async function getSessionsByEvent(eventName: string) {
   const sessions: Session[] = [];
   await base("Sessions")
     .select({
-      view: "Scheduled sessions",
       fields: [
         "Title",
         "Description",
@@ -65,7 +64,7 @@ export async function getSessionsByEvent(eventName: string) {
         "Capacity",
         "Num RSVPs",
       ],
-      filterByFormula: `{Event name} = "${eventName}"`,
+      filterByFormula: `AND({Event name} = "${eventName}", AND({Start time}, {End time}, {Location}))`,
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
