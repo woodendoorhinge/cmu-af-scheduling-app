@@ -1,14 +1,12 @@
-import {
-  Event,
-  getDaysByEvent,
-  getGuests,
-  getLocations,
-  getRSVPsByUser,
-  getSessionsByEvent,
-} from "@/utils/db";
 import { EventDisplay } from "./event";
 import { Suspense } from "react";
 import { cookies } from "next/headers";
+import { getDaysByEvent } from "@/db/days";
+import { getSessionsByEvent } from "@/db/sessions";
+import { getLocations } from "@/db/locations";
+import { getGuests } from "@/db/guests";
+import { getRSVPsByUser } from "@/db/rsvps";
+import { Event } from "@/db/events";
 
 export default async function EventPage(props: { event: Event }) {
   const { event } = props;

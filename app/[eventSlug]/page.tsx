@@ -1,4 +1,4 @@
-import { getEventByName } from "@/utils/db";
+import { getEventByName } from "@/db/events";
 import EventPage from "./event-page";
 
 export default async function Page(props: { params: { eventSlug: string } }) {

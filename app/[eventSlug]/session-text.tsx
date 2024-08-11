@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { DateTime } from "luxon";
-import { Session, Location } from "@/utils/db";
+import { Session } from "@/db/sessions";
+import { Location } from "@/db/locations";
 
 export function SessionText(props: {
   session: Session;

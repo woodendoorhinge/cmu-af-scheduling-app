@@ -1,4 +1,3 @@
-import { Event } from "@/utils/db";
 import { Suspense } from "react";
 import {
   ArrowRightIcon,
@@ -7,6 +6,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { DateTime } from "luxon";
 import Link from "next/link";
+import { Event } from "@/db/events";
 
 export default async function SummaryPage(props: { events: Event[] }) {
   const { events } = props;

@@ -1,5 +1,4 @@
 "use client";
-import { Day, Location, Event, Guest, RSVP } from "@/utils/db";
 import { ScheduleSettings } from "./schedule-settings";
 import { DayGrid } from "./day-grid";
 import { CalendarIcon, LinkIcon } from "@heroicons/react/24/outline";
@@ -8,6 +7,12 @@ import { useSearchParams } from "next/navigation";
 import { DayText } from "./day-text";
 import { Input } from "./input";
 import { useState } from "react";
+import { Day } from "@/db/days";
+import { Event } from "@/db/events";
+import { Guest } from "@/db/guests";
+import { Location } from "@/db/locations";
+import { RSVP } from "@/db/rsvps";
+import { multEvents } from "@/db/db";
 
 export function EventDisplay(props: {
   event: Event;
@@ -19,12 +24,11 @@ export function EventDisplay(props: {
   const { event, days, locations, guests, rsvps } = props;
   const daysForEvent = days.filter(
     (day) =>
-      process.env.MULTIPLE_EVENTS !== "true" ||
-      (day["Event name"] && day["Event name"][0] === event.Name)
+      multEvents || (day["Event name"] && day["Event name"][0] === event.Name)
   );
   const locationsForEvent = locations.filter(
     (loc) =>
-      process.env.MULTIPLE_EVENTS !== "true" ||
+      multEvents ||
       (event["Location names"] && event["Location names"].includes(loc.Name))
   );
   const searchParams = useSearchParams();

@@ -3,6 +3,7 @@ import { Inter, Montserrat, Roboto } from "next/font/google";
 import "./globals.css";
 import NavBar from "./nav-bar";
 import { Context } from "./context";
+import { multEvents } from "@/db/db";
 import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -36,11 +37,11 @@ export default function RootLayout({
     <html lang="en" className={fontVars}>
       <body className="font-monteserrat">
         <Context>
-          {process.env.MULTIPLE_EVENTS === "true" && <NavBar />}
+          {multEvents && <NavBar />}
           <main
             className={clsx(
               "lg:px-24 sm:px-10 p-6",
-              process.env.MULTIPLE_EVENTS === "true" ? "py-24" : "pt-12 pb-24"
+              multEvents ? "py-24" : "pt-12 pb-24"
             )}
           >
             {children}

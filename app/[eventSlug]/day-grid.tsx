@@ -1,5 +1,4 @@
 "use client";
-import { Location, Day, Guest, RSVP } from "@/utils/db";
 import { LocationCol } from "./location-col";
 import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
@@ -9,6 +8,10 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { Tooltip } from "./tooltip";
 import { DateTime } from "luxon";
+import { Day } from "@/db/days";
+import { Guest } from "@/db/guests";
+import { RSVP } from "@/db/rsvps";
+import { Location } from "@/db/locations";
 
 export function DayGrid(props: {
   eventName: string;

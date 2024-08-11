@@ -1,4 +1,8 @@
-import { Session, Location, Day, Guest, RSVP } from "@/utils/db";
+import { Session } from "@/db/sessions";
+import { Day } from "@/db/days";
+import { Location } from "@/db/locations";
+import { Guest } from "@/db/guests";
+import { RSVP } from "@/db/rsvps";
 import { SessionBlock } from "./session-block";
 import { getNumHalfHours } from "@/utils/utils";
 import clsx from "clsx";

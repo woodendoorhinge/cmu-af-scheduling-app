@@ -1,12 +1,11 @@
-import {
-  getDaysByEvent,
-  getGuestsByEvent,
-  getBookableLocations,
-  getSessionsByEvent,
-  getEventByName,
-} from "@/utils/db";
+import { getEventByName } from "@/db/events";
 import { AddSessionForm } from "./add-session-form";
 import { Suspense } from "react";
+import { getDaysByEvent } from "@/db/days";
+import { getSessionsByEvent } from "@/db/sessions";
+import { getGuestsByEvent } from "@/db/guests";
+import { getBookableLocations } from "@/db/locations";
+import { multEvents } from "@/db/db";
 
 export default async function AddSession(props: {
   params: { eventSlug: string };
@@ -34,7 +33,7 @@ export default async function AddSession(props: {
   const filteredLocations = locations.filter(
     (location) =>
       location.Bookable &&
-      (process.env.MULTIPLE_EVENTS !== "true" ||
+      (multEvents ||
         (event["Location names"] &&
           event["Location names"].includes(location.Name)))
   );

@@ -1,6 +1,9 @@
-import { Guest, Session, Location, getSessions } from "@/utils/db";
-import { Day } from "@/utils/db";
+import { Day } from "@/db/days";
+import { Location } from "@/db/locations";
+import { Guest } from "@/db/guests";
+import { Session, getSessions } from "@/db/sessions";
 import { DateTime } from "luxon";
+import { multEvents } from "@/db/db";
 
 type SessionParams = {
   title: string;
@@ -58,7 +61,7 @@ export async function POST(req: Request) {
     Day: [day.ID],
     "Attendee scheduled": true,
   };
-  if (process.env.MULTIPLE_EVENTS === "true" && day["Event name"]) {
+  if (multEvents && day["Event name"]) {
     session.Event = [day["Event name"]];
   }
   const existingSessions = await getSessions();
