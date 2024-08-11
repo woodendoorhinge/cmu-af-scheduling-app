@@ -33,7 +33,10 @@ export default async function AddSession(props: {
   });
   const filteredLocations = locations.filter(
     (location) =>
-      location.Bookable && event["Location names"].includes(location.Name)
+      location.Bookable &&
+      (process.env.MULTIPLE_EVENTS !== "true" ||
+        (event["Location names"] &&
+          event["Location names"].includes(location.Name)))
   );
   return (
     <Suspense fallback={<div>Loading...</div>}>
