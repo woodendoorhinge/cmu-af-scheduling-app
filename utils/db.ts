@@ -157,10 +157,13 @@ export async function getGuests() {
 
 export async function getGuestsByEvent(eventName: string) {
   const guests: Guest[] = [];
+  const filterFormula = multEvents
+    ? `SEARCH("${eventName}", {Events}) != 0`
+    : "1";
   await base("Guests")
     .select({
       fields: ["Full name", "Email"],
-      filterByFormula: `SEARCH("${eventName}", {Events}) != 0`,
+      filterByFormula: filterFormula,
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
@@ -176,23 +179,18 @@ export type Day = {
   End: string;
   "Start bookings": string;
   "End bookings": string;
-  "Event name": string;
-  Event: string[];
+  "Event name"?: string;
+  Event?: string[];
   ID: string;
   Sessions: Session[];
 };
 export async function getDays() {
   const days: Day[] = [];
+  const fieldsToFetch = ["Start", "End", "Start bookings", "End bookings"];
+  multEvents && fieldsToFetch.push("Event name", "Event");
   await base("Days")
     .select({
-      fields: [
-        "Start",
-        "End",
-        "Start bookings",
-        "End bookings",
-        "Event name",
-        "Event",
-      ],
+      fields: fieldsToFetch,
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
@@ -208,17 +206,13 @@ export async function getDays() {
 
 export async function getDaysByEvent(eventName: string) {
   const days: Day[] = [];
+  const filterFormula = multEvents ? `{Event name} = "${eventName}"` : "1";
+  const fieldsToFetch = ["Start", "End", "Start bookings", "End bookings"];
+  multEvents && fieldsToFetch.push("Event name", "Event");
   await base("Days")
     .select({
-      fields: [
-        "Start",
-        "End",
-        "Start bookings",
-        "End bookings",
-        "Event name",
-        "Event",
-      ],
-      filterByFormula: `{Event name} = "${eventName}"`,
+      fields: fieldsToFetch,
+      filterByFormula: filterFormula,
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {

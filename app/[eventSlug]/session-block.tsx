@@ -11,13 +11,14 @@ import { UserContext } from "../context";
 import { useScreenWidth } from "@/utils/hooks";
 
 export function SessionBlock(props: {
+  eventName: string;
   session: Session;
   location: Location;
   day: Day;
   guests: Guest[];
   rsvpsForEvent: RSVP[];
 }) {
-  const { session, location, day, guests, rsvpsForEvent } = props;
+  const { eventName, session, location, day, guests, rsvpsForEvent } = props;
   const startTime = new Date(session["Start time"]).getTime();
   const endTime = new Date(session["End time"]).getTime();
   const sessionLength = endTime - startTime;
@@ -31,7 +32,7 @@ export function SessionBlock(props: {
     startTime < new Date(day["End bookings"]).getTime();
   return isBookable ? (
     <BookableSessionCard
-      eventName={day["Event name"][0]}
+      eventName={eventName}
       session={session}
       location={location}
       numHalfHours={numHalfHours}

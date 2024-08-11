@@ -11,12 +11,13 @@ import { Tooltip } from "./tooltip";
 import { DateTime } from "luxon";
 
 export function DayGrid(props: {
+  eventName: string;
   locations: Location[];
   day: Day;
   guests: Guest[];
   rsvps: RSVP[];
 }) {
-  const { day, locations, guests, rsvps } = props;
+  const { eventName, day, locations, guests, rsvps } = props;
   const searchParams = useSearchParams();
   const locParams = searchParams?.getAll("loc");
   const locationsFromParams = locations.filter((loc) =>
@@ -151,6 +152,7 @@ export function DayGrid(props: {
                     rsvps={rsvps}
                     day={day}
                     location={location}
+                    eventName={eventName}
                   />
                 );
               })}

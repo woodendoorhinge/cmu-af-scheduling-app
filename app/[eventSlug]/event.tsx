@@ -18,7 +18,9 @@ export function EventDisplay(props: {
 }) {
   const { event, days, locations, guests, rsvps } = props;
   const daysForEvent = days.filter(
-    (day) => day["Event name"][0] === event.Name
+    (day) =>
+      !process.env.MULTIPLE_EVENTS ||
+      (day["Event name"] && day["Event name"][0] === event.Name)
   );
   const locationsForEvent = locations.filter((loc) =>
     event["Location names"].includes(loc.Name)
@@ -78,6 +80,7 @@ export function EventDisplay(props: {
                 locations={locationsForEvent}
                 guests={guests}
                 rsvps={rsvps}
+                eventName={event.Name}
               />
             ) : (
               <DayText
