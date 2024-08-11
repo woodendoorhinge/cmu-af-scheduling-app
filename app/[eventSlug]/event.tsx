@@ -19,11 +19,13 @@ export function EventDisplay(props: {
   const { event, days, locations, guests, rsvps } = props;
   const daysForEvent = days.filter(
     (day) =>
-      !process.env.MULTIPLE_EVENTS ||
+      process.env.MULTIPLE_EVENTS !== "true" ||
       (day["Event name"] && day["Event name"][0] === event.Name)
   );
-  const locationsForEvent = locations.filter((loc) =>
-    event["Location names"].includes(loc.Name)
+  const locationsForEvent = locations.filter(
+    (loc) =>
+      process.env.MULTIPLE_EVENTS !== "true" ||
+      (event["Location names"] && event["Location names"].includes(loc.Name))
   );
   const searchParams = useSearchParams();
   const view = searchParams.get("view") ?? "grid";

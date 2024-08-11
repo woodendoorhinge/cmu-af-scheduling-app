@@ -18,7 +18,7 @@ type SessionInsert = {
   "End time": string;
   Hosts: string[];
   Location: string[];
-  Event: string[];
+  Event?: string[];
   Day: string[];
   "Attendee scheduled": boolean;
 };
@@ -55,10 +55,12 @@ export async function POST(req: Request) {
     "End time": new Date(
       startTimeStamp.getTime() + duration * 60 * 1000
     ).toISOString(),
-    Event: [day["Event"][0]],
     Day: [day.ID],
     "Attendee scheduled": true,
   };
+  if (process.env.MULTIPLE_EVENTS === "true" && day["Event name"]) {
+    session.Event = [day["Event name"]];
+  }
   const existingSessions = await getSessions();
   const sessionValid = validateSession(session, existingSessions);
   if (sessionValid) {

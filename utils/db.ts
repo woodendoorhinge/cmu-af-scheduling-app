@@ -230,10 +230,10 @@ export type Event = {
   Name: string;
   Description: string;
   Website: string;
-  Guests: string[];
+  Guests?: string[];
   Start: string;
   End: string;
-  "Location names": string[];
+  "Location names"?: string[];
 };
 export async function getEvents() {
   const events: Event[] = [];
