@@ -103,7 +103,7 @@ export function DayGrid(props: {
                   content={<p className="text-sm p-2">{loc.Description}</p>}
                   placement="bottom-start"
                 >
-                  <span
+                  <div
                     key={loc.Name}
                     className="p-1 border-b border-gray-100 flex flex-col justify-between h-full"
                   >
@@ -127,7 +127,7 @@ export function DayGrid(props: {
                       width={500}
                       height={500}
                     />
-                  </span>
+                  </div>
                 </Tooltip>
               ))}
             </div>

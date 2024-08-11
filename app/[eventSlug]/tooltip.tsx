@@ -74,13 +74,13 @@ export function Tooltip(props: {
 
   return content ? (
     <div className={className}>
-      <span
+      <div
         suppressHydrationWarning={suppressHydrationWarning}
         ref={refs.setReference}
         {...getReferenceProps()}
       >
         {children}
-      </span>
+      </div>
       <Transition
         show={open}
         enter="transition ease-out duration-50"
