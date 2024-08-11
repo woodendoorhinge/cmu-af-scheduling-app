@@ -4,6 +4,7 @@ Airtable.configure({
   apiKey: process.env.AIRTABLE_API_KEY,
 });
 const base = Airtable.base(process.env.AIRTABLE_BASE_ID);
+const multEvents = (process.env.MULTIPLE_EVENTS = "true");
 
 export type Session = {
   ID: string;
@@ -49,6 +50,9 @@ export async function getSessions() {
 
 export async function getSessionsByEvent(eventName: string) {
   const sessions: Session[] = [];
+  const filterFormula = `${
+    multEvents ? `AND({Event name} = "${eventName}", ` : ""
+  }AND({Start time}, {End time}, {Location}))`;
   await base("Sessions")
     .select({
       fields: [
@@ -64,7 +68,7 @@ export async function getSessionsByEvent(eventName: string) {
         "Capacity",
         "Num RSVPs",
       ],
-      filterByFormula: `AND({Event name} = "${eventName}", AND({Start time}, {End time}, {Location}))`,
+      filterByFormula: filterFormula,
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
@@ -111,7 +115,6 @@ export async function getLocations() {
       });
       fetchNextPage();
     });
-  console.log(locations[0]["Area description"]);
   return locations;
 }
 
@@ -139,7 +142,7 @@ export type Guest = {
 };
 export async function getGuests() {
   const guests: Guest[] = [];
-  await base("Guest list")
+  await base("Guests")
     .select({
       fields: ["Full name", "Email"],
     })
@@ -154,7 +157,7 @@ export async function getGuests() {
 
 export async function getGuestsByEvent(eventName: string) {
   const guests: Guest[] = [];
-  await base("Guest list")
+  await base("Guests")
     .select({
       fields: ["Full name", "Email"],
       filterByFormula: `SEARCH("${eventName}", {Events}) != 0`,
