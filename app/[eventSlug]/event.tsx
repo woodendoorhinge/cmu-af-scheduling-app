@@ -12,7 +12,7 @@ import { Event } from "@/db/events";
 import { Guest } from "@/db/guests";
 import { Location } from "@/db/locations";
 import { RSVP } from "@/db/rsvps";
-import { multEvents } from "@/db/db";
+import { CONSTS } from "@/utils/constants";
 
 export function EventDisplay(props: {
   event: Event;
@@ -24,11 +24,12 @@ export function EventDisplay(props: {
   const { event, days, locations, guests, rsvps } = props;
   const daysForEvent = days.filter(
     (day) =>
-      multEvents || (day["Event name"] && day["Event name"][0] === event.Name)
+      CONSTS.MULTIPLE_EVENTS ||
+      (day["Event name"] && day["Event name"][0] === event.Name)
   );
   const locationsForEvent = locations.filter(
     (loc) =>
-      multEvents ||
+      CONSTS.MULTIPLE_EVENTS ||
       (event["Location names"] && event["Location names"].includes(loc.Name))
   );
   const searchParams = useSearchParams();

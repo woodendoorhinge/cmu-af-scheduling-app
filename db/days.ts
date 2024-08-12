@@ -1,4 +1,5 @@
-import { base, multEvents } from "./db";
+import { CONSTS } from "@/utils/constants";
+import { base } from "./db";
 import { Session } from "./sessions";
 
 export type Day = {
@@ -14,7 +15,7 @@ export type Day = {
 export async function getDays() {
   const days: Day[] = [];
   const fieldsToFetch = ["Start", "End", "Start bookings", "End bookings"];
-  multEvents && fieldsToFetch.push("Event name", "Event");
+  CONSTS.MULTIPLE_EVENTS && fieldsToFetch.push("Event name", "Event");
   await base("Days")
     .select({
       fields: fieldsToFetch,
@@ -33,9 +34,11 @@ export async function getDays() {
 
 export async function getDaysByEvent(eventName: string) {
   const days: Day[] = [];
-  const filterFormula = multEvents ? `{Event name} = "${eventName}"` : "1";
+  const filterFormula = CONSTS.MULTIPLE_EVENTS
+    ? `{Event name} = "${eventName}"`
+    : "1";
   const fieldsToFetch = ["Start", "End", "Start bookings", "End bookings"];
-  multEvents && fieldsToFetch.push("Event name", "Event");
+  CONSTS.MULTIPLE_EVENTS && fieldsToFetch.push("Event name", "Event");
   await base("Days")
     .select({
       fields: fieldsToFetch,

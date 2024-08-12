@@ -5,7 +5,7 @@ import { getDaysByEvent } from "@/db/days";
 import { getSessionsByEvent } from "@/db/sessions";
 import { getGuestsByEvent } from "@/db/guests";
 import { getBookableLocations } from "@/db/locations";
-import { multEvents } from "@/db/db";
+import { CONSTS } from "@/utils/constants";
 
 export default async function AddSession(props: {
   params: { eventSlug: string };
@@ -33,7 +33,7 @@ export default async function AddSession(props: {
   const filteredLocations = locations.filter(
     (location) =>
       location.Bookable &&
-      (multEvents ||
+      (CONSTS.MULTIPLE_EVENTS ||
         (event["Location names"] &&
           event["Location names"].includes(location.Name)))
   );

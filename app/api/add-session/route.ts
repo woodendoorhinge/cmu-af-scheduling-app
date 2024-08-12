@@ -3,7 +3,7 @@ import { Location } from "@/db/locations";
 import { Guest } from "@/db/guests";
 import { Session, getSessions } from "@/db/sessions";
 import { DateTime } from "luxon";
-import { multEvents } from "@/db/db";
+import { CONSTS } from "@/utils/constants";
 
 type SessionParams = {
   title: string;
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     Day: [day.ID],
     "Attendee scheduled": true,
   };
-  if (multEvents && day["Event name"]) {
+  if (CONSTS.MULTIPLE_EVENTS && day["Event name"]) {
     session.Event = [day["Event name"]];
   }
   const existingSessions = await getSessions();

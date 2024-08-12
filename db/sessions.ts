@@ -1,4 +1,5 @@
-import { base, multEvents } from "./db";
+import { base } from "./db";
+import { CONSTS } from "@/utils/constants";
 
 export type Session = {
   ID: string;
@@ -45,7 +46,7 @@ export async function getSessions() {
 export async function getSessionsByEvent(eventName: string) {
   const sessions: Session[] = [];
   const filterFormula = `${
-    multEvents ? `AND({Event name} = "${eventName}", ` : ""
+    CONSTS.MULTIPLE_EVENTS ? `AND({Event name} = "${eventName}", ` : ""
   }AND({Start time}, {End time}, {Location}))`;
   await base("Sessions")
     .select({

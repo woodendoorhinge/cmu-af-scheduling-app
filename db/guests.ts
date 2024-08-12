@@ -1,4 +1,5 @@
-import { base, multEvents } from "./db";
+import { CONSTS } from "@/utils/constants";
+import { base } from "./db";
 
 export type Guest = {
   "Full name": string;
@@ -22,7 +23,7 @@ export async function getGuests() {
 
 export async function getGuestsByEvent(eventName: string) {
   const guests: Guest[] = [];
-  const filterFormula = multEvents
+  const filterFormula = CONSTS.MULTIPLE_EVENTS
     ? `SEARCH("${eventName}", {Events}) != 0`
     : "1";
   await base("Guests")

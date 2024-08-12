@@ -1,3 +1,5 @@
+// Required for the tailwind compiler to work with classes not written elsewhere
+
 export const rowSpanVars = [
   "row-span-1",
   "row-span-2",
