@@ -29,12 +29,13 @@ export async function POST(req: Request) {
       }
     );
   } else {
+    console.log("REMOVING RSVP", { sessionId, guestId });
     await base("RSVPs")
       .select({
-        filterByFormula: `AND({SessionId} = "${sessionId}", {Guest} = "${guestId}")`,
+        filterByFormula: `AND({Session ID} = "${sessionId}", {Guest ID} = "${guestId}")`,
       })
       .eachPage(function page(records: any, fetchNextPage: any) {
-        console.log({ records });
+        console.log("RECORDS", { records });
         records.forEach(function (record: any) {
           base("RSVPs").destroy([record.getId()], function (err: string) {
             if (err) {
