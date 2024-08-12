@@ -7,6 +7,7 @@ import {
 import { DateTime } from "luxon";
 import Link from "next/link";
 import { Event } from "@/db/events";
+import { CONSTS } from "@/utils/constants";
 
 export default async function SummaryPage(props: { events: Event[] }) {
   const { events } = props;
@@ -16,11 +17,8 @@ export default async function SummaryPage(props: { events: Event[] }) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="mx-auto max-w-2xl">
-        <h1 className="text-4xl font-bold mt-5">Festival Season Schedule</h1>
-        <p className="mt-3">
-          From May 31st to June 9th 2024, Lighthaven will be hosting a series of
-          festivals. Check out the schedule below!
-        </p>
+        <h1 className="text-4xl font-bold mt-5">{CONSTS.TITLE}</h1>
+        <p className="mt-3">{CONSTS.DESCRIPTION}</p>
         <div className="flex flex-col gap-8 pl-5 mt-10">
           {sortedEvents.map((event) => (
             <div key={event.Name}>

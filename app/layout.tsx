@@ -20,9 +20,8 @@ const monteserrat = Montserrat({
 const fontVars = [roboto.variable, monteserrat.variable].join(" ");
 
 export const metadata: Metadata = {
-  title: "Festival Season Schedule",
-  description:
-    "A schedule of events for LessOnline, Summer Camp, and Manifest.",
+  title: CONSTS.TITLE,
+  description: CONSTS.DESCRIPTION,
   icons: {
     icon: "/favicon.ico",
   },
