@@ -33,7 +33,7 @@ export default async function AddSession(props: {
   const filteredLocations = locations.filter(
     (location) =>
       location.Bookable &&
-      (CONSTS.MULTIPLE_EVENTS ||
+      (!CONSTS.MULTIPLE_EVENTS ||
         (event["Location names"] &&
           event["Location names"].includes(location.Name)))
   );
