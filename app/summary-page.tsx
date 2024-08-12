@@ -19,13 +19,13 @@ export default async function SummaryPage(props: { events: Event[] }) {
       <div className="mx-auto max-w-2xl">
         <h1 className="text-4xl font-bold mt-5">{CONSTS.TITLE}</h1>
         <p className="mt-3">{CONSTS.DESCRIPTION}</p>
-        <div className="flex flex-col gap-8 pl-5 mt-10">
+        <div className="flex flex-col gap-8 sm:pl-5 mt-10">
           {sortedEvents.map((event) => (
             <div key={event.Name}>
               <h1 className="sm:text-2xl text-xl font-bold">{event.Name}</h1>
-              <div className="flex text-gray-500 text-sm mt-1 gap-5 font-medium">
+              <div className="flex text-gray-500 text-xs mt-1 gap-5 font-medium">
                 <span className="flex gap-1 items-center">
-                  <CalendarIcon className="h-4 w-4 stroke-2" />
+                  <CalendarIcon className="3 w-3 stroke-2" />
                   <span>
                     {DateTime.fromISO(`${event.Start}T12:00:00.000-07:00`)
                       .setZone("America/Los_Angeles")
@@ -40,7 +40,7 @@ export default async function SummaryPage(props: { events: Event[] }) {
                   className="flex gap-1 items-center hover:underline"
                   href={`https://${event.Website}`}
                 >
-                  <LinkIcon className="h-4 w-4 stroke-2" />
+                  <LinkIcon className="h-3 w-3 stroke-2" />
                   <span>{event.Website}</span>
                 </a>
               </div>

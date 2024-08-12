@@ -19,7 +19,7 @@ export function ScheduleSettings(props: { guests: Guest[] }) {
   const pathname = usePathname();
   const { replace } = useRouter();
   return (
-    <div className="flex flex-col gap-5 w-full rounded-md border border-gray-100 p-2">
+    <div className="flex flex-col gap-5 w-full rounded-md border border-gray-100 p-2 text-sm sm:text-base">
       <div className="flex flex-col gap-1">
         <span className="text-gray-500">View</span>
         <SelectView
@@ -69,7 +69,7 @@ function SelectView(props: {
         <button
           key={v.name}
           className={clsx(
-            "flex gap-1 items-center rounded-md text-sm py-1.5 px-3 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rose-400",
+            "flex gap-1 items-center rounded-md text-xs sm:text-sm py-1.5 px-3 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rose-400",
             view === v.name
               ? "bg-rose-400 text-white"
               : "text-gray-400 hover:bg-gray-50 ring-1 ring-inset ring-gray-300"
