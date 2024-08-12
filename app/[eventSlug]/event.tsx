@@ -24,12 +24,12 @@ export function EventDisplay(props: {
   const { event, days, locations, guests, rsvps } = props;
   const daysForEvent = days.filter(
     (day) =>
-      CONSTS.MULTIPLE_EVENTS ||
+      !CONSTS.MULTIPLE_EVENTS ||
       (day["Event name"] && day["Event name"][0] === event.Name)
   );
   const locationsForEvent = locations.filter(
     (loc) =>
-      CONSTS.MULTIPLE_EVENTS ||
+      !CONSTS.MULTIPLE_EVENTS ||
       (event["Location names"] && event["Location names"].includes(loc.Name))
   );
   const searchParams = useSearchParams();
