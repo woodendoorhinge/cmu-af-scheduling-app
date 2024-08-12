@@ -30,6 +30,7 @@ export default function Example() {
               </div>
               <div className="flex justify-between w-full items-center">
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                  {/* Desktop nav */}
                   <div className="hidden sm:block">
                     <div className="flex space-x-4">
                       {CONSTS.NAV_ITEMS.map((item) => (
