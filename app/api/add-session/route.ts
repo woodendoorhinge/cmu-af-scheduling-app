@@ -23,7 +23,6 @@ type SessionInsert = {
   Hosts: string[];
   Location: string[];
   Event?: string[];
-  Day: string[];
   "Attendee scheduled": boolean;
 };
 
@@ -59,7 +58,6 @@ export async function POST(req: Request) {
     "End time": new Date(
       startTimeStamp.getTime() + duration * 60 * 1000
     ).toISOString(),
-    Day: [day.ID],
     "Attendee scheduled": true,
   };
   if (CONSTS.MULTIPLE_EVENTS && day["Event"]) {
