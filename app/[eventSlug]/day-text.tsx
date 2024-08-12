@@ -1,10 +1,13 @@
 "use client";
-import { Location, Day, Session, RSVP } from "@/utils/db";
 import { useSearchParams } from "next/navigation";
 import { SessionText } from "./session-text";
 import { DateTime } from "luxon";
 import { useContext } from "react";
 import { UserContext } from "../context";
+import { Day } from "@/db/days";
+import { RSVP } from "@/db/rsvps";
+import { Location } from "@/db/locations";
+import { Session } from "@/db/sessions";
 
 export function DayText(props: {
   locations: Location[];
@@ -47,7 +50,7 @@ export function DayText(props: {
     const rsvpSet = new Set(rsvps.map((rsvp) => rsvp.Session[0]));
     sessions = sessions.filter(
       (session) =>
-        rsvpSet.has(session.id) ||
+        rsvpSet.has(session.ID) ||
         (currentUser && session.Hosts?.includes(currentUser))
     );
   }

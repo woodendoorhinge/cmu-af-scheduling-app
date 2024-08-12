@@ -1,5 +1,4 @@
 "use client";
-import { Guest, Location } from "@/utils/db";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import clsx from "clsx";
@@ -9,6 +8,8 @@ import {
   TableCellsIcon,
 } from "@heroicons/react/24/outline";
 import { UserSelect } from "../user-select";
+import { Guest } from "@/db/guests";
+import { Location } from "@/db/locations";
 
 export function ScheduleSettings(props: { guests: Guest[] }) {
   const { guests } = props;

@@ -1,5 +1,5 @@
 "use client";
-import { Guest } from "@/utils/db";
+import { Guest } from "@/db/guests";
 import { useContext } from "react";
 import { SelectHosts } from "./[eventSlug]/add-session/add-session-form";
 import { UserContext } from "./context";

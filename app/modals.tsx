@@ -7,8 +7,8 @@ import {
   MapIcon,
 } from "@heroicons/react/24/outline";
 import { UserSelect } from "./user-select";
-import { Guest, Session } from "@/utils/db";
 import { UserContext } from "./context";
+import { Guest } from "@/db/guests";
 
 export function MapModal() {
   const [open, setOpen] = useState(false);
