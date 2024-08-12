@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { Fragment, useEffect, useState } from "react";
 import { Input } from "../input";
 import { format } from "date-fns";
-import { Session, Location, Guest, Day } from "@/utils/db";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/16/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -11,6 +10,10 @@ import { DateTime } from "luxon";
 import { useRouter, useSearchParams } from "next/navigation";
 import { convertParamDateTime, dateOnDay } from "@/utils/utils";
 import { MyListbox } from "./select";
+import { Day } from "@/db/days";
+import { Guest } from "@/db/guests";
+import { Location } from "@/db/locations";
+import { Session } from "@/db/sessions";
 
 export function AddSessionForm(props: {
   eventName: string;
