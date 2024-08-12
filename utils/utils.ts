@@ -1,4 +1,4 @@
-import { Day } from "./db";
+import { Day } from "@/db/days";
 
 export const getPercentThroughDay = (now: Date, start: Date, end: Date) =>
   ((now.getTime() - start.getTime()) / (end.getTime() - start.getTime())) * 100;
