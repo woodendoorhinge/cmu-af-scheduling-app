@@ -45,9 +45,10 @@ export async function getSessions() {
 
 export async function getSessionsByEvent(eventName: string) {
   const sessions: Session[] = [];
-  const filterFormula = `${
-    CONSTS.MULTIPLE_EVENTS ? `AND({Event name} = "${eventName}", ` : ""
-  }AND({Start time}, {End time}, {Location}))`;
+  const isScheduledFilter = "AND({Start time}, {End time}, {Location})";
+  const filterFormula = CONSTS.MULTIPLE_EVENTS
+    ? `AND({Event name} = "${eventName}", ${isScheduledFilter})`
+    : isScheduledFilter;
   await base("Sessions")
     .select({
       fields: [
