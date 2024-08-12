@@ -4,6 +4,7 @@ import { Guest } from "@/db/guests";
 import { Session, getSessions } from "@/db/sessions";
 import { DateTime } from "luxon";
 import { CONSTS } from "@/utils/constants";
+import { base } from "@/db/db";
 
 type SessionParams = {
   title: string;
@@ -61,18 +62,13 @@ export async function POST(req: Request) {
     Day: [day.ID],
     "Attendee scheduled": true,
   };
-  if (CONSTS.MULTIPLE_EVENTS && day["Event name"]) {
-    session.Event = [day["Event name"]];
+  if (CONSTS.MULTIPLE_EVENTS && day["Event"]) {
+    session.Event = [day["Event"][0]];
   }
+  console.log(session);
   const existingSessions = await getSessions();
   const sessionValid = validateSession(session, existingSessions);
   if (sessionValid) {
-    const Airtable = require("airtable");
-    Airtable.configure({
-      endpointUrl: "https://api.airtable.com",
-      apiKey: process.env.AIRTABLE_API_KEY,
-    });
-    const base = Airtable.base("appklVAIrAhkGj98d");
     await base("Sessions").create(
       [
         {
@@ -82,7 +78,7 @@ export async function POST(req: Request) {
       function (err: string, records: any) {
         if (err) {
           console.error(err);
-          return;
+          return Response.error();
         }
         records.forEach(function (record: any) {
           console.log(record.getId());
@@ -90,11 +86,8 @@ export async function POST(req: Request) {
       }
     );
     return Response.json({ success: true });
-    // return res.status(200).json({ success: true });
   } else {
-    // console.error("Invalid session");
     return Response.error();
-    // return res.status(400).json({ success: false });
   }
 }
 
