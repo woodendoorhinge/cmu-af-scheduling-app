@@ -90,7 +90,7 @@ function BlankSessionCard(props: { numHalfHours: number }) {
 }
 
 async function rsvp(guestId: string, sessionId: string, remove = false) {
-  await fetch("/api/add-rsvp", {
+  await fetch("/api/toggle-rsvp", {
     method: "POST",
     body: JSON.stringify({
       guestId,

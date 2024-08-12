@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   } else {
     await base("RSVPs")
       .select({
-        filterByFormula: `AND({SessionId} = "${sessionId}", {GuestId} = "${guestId}")`,
+        filterByFormula: `AND({SessionId} = "${sessionId}", {Guest} = "${guestId}")`,
       })
       .eachPage(function page(records: any, fetchNextPage: any) {
         console.log({ records });
