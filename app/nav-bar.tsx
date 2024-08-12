@@ -1,28 +1,11 @@
 "use client";
 import { Disclosure } from "@headlessui/react";
-import {
-  Bars3Icon,
-  UserGroupIcon,
-  CakeIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ExportScheduleModal, MapModal } from "./modals";
-
-type NavItem = {
-  name: string;
-  href: string;
-  icon: any;
-};
-
-// Add your events to the nav bar here
-// Find available icons at https://heroicons.com/
-const navigation = [
-  { name: "Conference", href: "/Conference", icon: UserGroupIcon },
-  { name: "After Party", href: "/After-Party", icon: CakeIcon },
-] as NavItem[];
+import { CONSTS, NavItem } from "@/utils/constants";
 
 export default function Example() {
   return (
@@ -49,7 +32,7 @@ export default function Example() {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="hidden sm:ml-10 sm:block">
                     <div className="flex space-x-4">
-                      {navigation.map((item) => (
+                      {CONSTS.NAV_ITEMS.map((item) => (
                         <NavBarItem key={item.name} item={item} />
                       ))}
                     </div>
@@ -64,7 +47,7 @@ export default function Example() {
           </div>
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
+              {CONSTS.NAV_ITEMS.map((item) => (
                 <SmallNavBarItem key={item.name} item={item} />
               ))}
             </div>
