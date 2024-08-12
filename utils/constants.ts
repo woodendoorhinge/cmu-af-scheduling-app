@@ -7,7 +7,7 @@ export type NavItem = {
 };
 
 export const CONSTS = {
-  MULTIPLE_EVENTS: false,
+  MULTIPLE_EVENTS: true,
   // If you have multiple events, add your events to the nav bar below
   // If you only have one event, you can leave the array empty
   // Find available icons at https://heroicons.com/
