@@ -2,7 +2,7 @@ import { CONSTS } from "@/utils/constants";
 import { base } from "./db";
 
 export type Guest = {
-  "Full name": string;
+  Name: string;
   Email: string;
   ID: string;
 };
@@ -10,7 +10,7 @@ export async function getGuests() {
   const guests: Guest[] = [];
   await base("Guests")
     .select({
-      fields: ["Full name", "Email"],
+      fields: ["Name", "Email"],
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
@@ -28,7 +28,7 @@ export async function getGuestsByEvent(eventName: string) {
     : "1";
   await base("Guests")
     .select({
-      fields: ["Full name", "Email"],
+      fields: ["Name", "Email"],
       filterByFormula: filterFormula,
     })
     .eachPage(function page(records: any, fetchNextPage: any) {

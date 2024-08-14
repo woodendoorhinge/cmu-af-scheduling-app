@@ -277,10 +277,10 @@ export function SelectHosts(props: {
   const [query, setQuery] = useState("");
   const filteredGuests = guests
     .filter((guest) =>
-      guest["Full name"].toLowerCase().includes(query.toLowerCase())
+      guest["Name"].toLowerCase().includes(query.toLowerCase())
     )
-    .filter((guest) => guest["Full name"].trim().length > 0)
-    .sort((a, b) => a["Full name"].localeCompare(b["Full name"]))
+    .filter((guest) => guest["Name"].trim().length > 0)
+    .sort((a, b) => a["Name"].localeCompare(b["Name"]))
     .slice(0, 20);
   return (
     <div className="w-full">
@@ -302,7 +302,7 @@ export function SelectHosts(props: {
                       key={host.ID}
                       className="py-1 px-2 bg-gray-100 rounded text-nowrap text-sm flex items-center gap-1"
                     >
-                      {host["Full name"]}
+                      {host.Name}
                       <button
                         onClick={() =>
                           setHosts(hosts.filter((h) => h !== host))
@@ -359,7 +359,7 @@ export function SelectHosts(props: {
                             disabled ? "text-gray-400" : "text-gray-900"
                           )}
                         >
-                          {guest["Full name"]}
+                          {guest.Name}
                         </span>
                         {selected ? (
                           <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-rose-400">
