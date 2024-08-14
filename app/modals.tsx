@@ -23,7 +23,7 @@ export function MapModal() {
       </button>
       <Modal open={open} setOpen={setOpen}>
         <Image
-          src="/LighthavenMap.png"
+          src="/map.png"
           alt="Map"
           className="w-full h-full"
           width={500}
