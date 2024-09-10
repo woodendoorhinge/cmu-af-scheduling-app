@@ -1,3 +1,4 @@
+import { CONSTS } from "@/utils/constants";
 import { base } from "./db";
 
 export type Event = {
@@ -9,18 +10,27 @@ export type Event = {
   End: string;
   "Location names"?: string[];
 };
+
+const eventFields = [
+  "Name",
+  "Description",
+  "Website",
+  "Start",
+  "End",
+];
+
+const fieldsIfMultipleEvents = [
+  "Guests",
+  "Location names"
+];
+
 export async function getEvents() {
   const events: Event[] = [];
   await base("Events")
     .select({
       fields: [
-        "Name",
-        "Description",
-        "Website",
-        "Guests",
-        "Start",
-        "End",
-        "Location names",
+        ...eventFields,
+        ...(CONSTS.MULTIPLE_EVENTS ? fieldsIfMultipleEvents : [])
       ],
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
@@ -39,13 +49,8 @@ export async function getEventByName(name: string) {
   await base("Events")
     .select({
       fields: [
-        "Name",
-        "Description",
-        "Website",
-        "Guests",
-        "Start",
-        "End",
-        "Location names",
+        ...eventFields,
+        ...(CONSTS.MULTIPLE_EVENTS ? fieldsIfMultipleEvents : [])
       ],
       filterByFormula: `{Name} = "${name}"`,
     })
