@@ -7,15 +7,14 @@ export type NavItem = {
 };
 
 export const CONSTS = {
-  TITLE: "Example Conference Weekend",
+  TITLE: "Agent Foundations 2025 at CMU",
   DESCRIPTION:
-    "An Example Conference is happening from August 23 - 25, 2024 at Lighthaven. Check out the schedules for the main event and afterparty below!",
+    "Agent Foundations 2025 at CMU is taking place March 3-7, 2025. Check out the schedule below!",
   MULTIPLE_EVENTS: true,
   // If you have multiple events, add your events to the nav bar below
   // If you only have one event, you can leave the array empty
   // Find available icons at https://heroicons.com/
   NAV_ITEMS: [
-    { name: "Conference", href: "/Conference", icon: UserGroupIcon },
-    { name: "After Party", href: "/After-Party", icon: CakeIcon },
+    { name: "Conference", href: "/Conference", icon: UserGroupIcon }
   ] as NavItem[],
 };
