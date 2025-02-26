@@ -11,7 +11,8 @@ export default async function AddSession(props: {
   params: { eventSlug: string };
 }) {
   const { eventSlug } = props.params;
-  const eventName = eventSlug.replace(/-/g, " ");
+  // const eventName = eventSlug.replace(/-/g, " ");
+  const eventName = decodeURIComponent(eventSlug.replace(/-/g, " "));
   const [event, days, sessions, guests, locations] = await Promise.all([
     getEventByName(eventName),
     getDaysByEvent(eventName),
